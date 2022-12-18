@@ -6,6 +6,9 @@ function App() {
   function addNote(title, note) {
     setNotes([...notes, { title, note}]);
   }
+  function deleteNote(index) {
+    setNotes(notes.filter((note, i) => i !== index));
+  }
 
   return (
     <div>
@@ -15,6 +18,7 @@ function App() {
           <li key={index}>
             <h2>{note.title}</h2>
             {note.note}
+            <button onClick={() => deleteNote(index)}>Delete</button>
           </li>
         ))}
       </ul>
