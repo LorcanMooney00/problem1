@@ -6,8 +6,13 @@ function App() {
   function addNote(title, note) {
     setNotes([...notes, { title, note}]);
   }
+  
   function deleteNote(index) {
     setNotes(notes.filter((note, i) => i !== index));
+  }
+
+  function editNote(index, newTitle, newNote, newColor, newBgColor) {
+    setNotes(notes.map((note, i) => i === index ? { title: newTitle, note: newNote} : note));
   }
 
   return (
@@ -19,6 +24,7 @@ function App() {
             <h2>{note.title}</h2>
             {note.note}
             <button onClick={() => deleteNote(index)}>Delete</button>
+            <button onClick={() => editNote(index, prompt('Enter new title:'), prompt('Enter new note:'))}>Edit</button>
           </li>
         ))}
       </ul>
