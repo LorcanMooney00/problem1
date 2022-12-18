@@ -1,23 +1,26 @@
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [notes, setNotes] = useState([]);
+
+  function addNote(title, note) {
+    setNotes([...notes, { title, note}]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Notes</h1>     
+        <form onSubmit={e => {
+        e.preventDefault();
+        addNote(e.target.title.value, e.target.note.value);
+        e.target.title.value = '';
+        e.target.note.value = '';
+      }}>
+        <input name="title" placeholder="Enter note title" />
+        <input name="note" placeholder="Enter note text" />
+        <button>Add Note</button>
+      </form>
     </div>
   );
 }
-
-export default App;
+export default App
